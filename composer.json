@@ -1,0 +1,28 @@
+{
+    "name": "felipeedev/laravel-utilities",
+    "description": "Laravel's utilities for most of FelipeeDev laravel's solutions and bundles.",
+    "authors": [
+        {
+            "name": "Filip Koblański",
+            "email": "filip.koblanski@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^7.0.0",
+        "illuminate/support": "^5.4"
+    },
+    "autoload": {
+        "classmap": [
+            "tests"
+        ],
+        "psr-4": {
+            "FelipeeDev\\Utilities\\": "src/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.x-dev"
+        }
+    },
+    "minimum-stability": "dev"
+}
