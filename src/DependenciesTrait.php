@@ -3,8 +3,8 @@
 use FelipeeDev\Utilities\Exceptions\DependencyNotFoundException;
 
 /**
- * Trait Overview
- * ===============
+ * DependenciesTrait Overview
+ * ==========================
  * Class that is using the following trait requires to have defined `dependencies` array with the pairs of a:
  * `[propertyName => Class\Name, ...]`
  *
@@ -12,6 +12,11 @@ use FelipeeDev\Utilities\Exceptions\DependencyNotFoundException;
  */
 trait DependenciesTrait
 {
+    public function hasDependency($name): bool
+    {
+        return array_has($this->dependencies, $name);
+    }
+
     public function getDependency($name)
     {
         if (!($dependency = array_get($this->dependencies, $name))) {
@@ -19,10 +24,15 @@ trait DependenciesTrait
         }
 
         if (!is_object($dependency)) {
-            $this->dependencies[$name] = app($dependency);
+            $this->setDependency($name, app($dependency));
         }
 
         return $this->dependencies[$name];
+    }
+
+    public function setDependency($name, $instance)
+    {
+        $this->dependencies[$name] = $instance;
     }
 
     public function resetDependency($name)

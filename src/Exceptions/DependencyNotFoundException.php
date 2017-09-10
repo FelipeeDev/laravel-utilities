@@ -2,4 +2,5 @@
 
 class DependencyNotFoundException extends \Exception
 {
+    protected $message = 'Dependency not found.';
 }

@@ -4,8 +4,8 @@ use EnterCode\Kernel\Exceptions\NoModelSetException;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Trait Overview
- * ==============
+ * RepositoryTrait Overview
+ * ========================
  * Base model's repositories wrapper.
  * Class containing the following trait should have declared `model` field with is an:
  * `\Illuminate\Database\Eloquent\Model`
