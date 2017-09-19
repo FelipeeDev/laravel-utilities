@@ -32,6 +32,14 @@ trait ModelCrud
     }
 
     /**
+     * @deprecated
+     */
+    public function store(array $input = [], array $defaults = []): Model
+    {
+        return $this->create($input, $defaults);
+    }
+
+    /**
      * @param Model $model
      * @param array $input
      * @param array $defaults

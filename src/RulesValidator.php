@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Validation\Validator;
 
 class RulesValidator
 {
@@ -31,31 +32,20 @@ class RulesValidator
     {
         try {
             $this->setMessages($rules);
-        } catch (\TypeError $e) {
-            $this->messages = [];
-        }
-
-        try {
             $this->setCustomAttributes($rules);
-        } catch (\TypeError $e) {
-            $this->customAttributes = [];
-        }
 
-        $validator = app('validator')->make(
-            array_filter($data),
-            $rules->getRules($type),
-            $this->messages,
-            $this->customAttributes
-        );
+            $validator = app('validator')->make(
+                array_filter($data),
+                $rules->getRules($type),
+                $this->messages,
+                $this->customAttributes
+            );
 
-        try {
-            $this->validating($data, $rules, $type);
-        } catch (ValidationException $e) {
-            throw $e;
+            $this->validating($validator, $rules, $type);
         } catch (\TypeError $e) {
         }
 
-        if ($validator->fails()) {
+        if (isset($validator) && $validator->fails()) {
             throw new ValidationException($validator);
         }
     }
@@ -87,9 +77,9 @@ class RulesValidator
         $this->customAttributes = $rules->getCustomAttributes($type);
     }
 
-    private function validating(array $data, Validation\Validating $rules, string $type = null)
+    private function validating(Validator $validator, Validation\Validating $rules, string $type = null)
     {
-        $rules->onValidate($data, $type);
+        $rules->onValidate($validator, $type);
     }
 
     private function setModel(Eloquent\ModelAccess $rules, Model $model)

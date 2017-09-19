@@ -1,5 +1,7 @@
 <?php namespace FelipeeDev\Utilities\Validation;
 
+use Illuminate\Validation\Validator;
+
 /**
  * Validating interface overview
  * =============================
@@ -11,9 +13,9 @@ interface Validating
     /**
      * Before validation hook. Should throw ValidationException on fail.
      *
-     * @param array $data    Array of validating data.
-     * @param string $type   (optional) Type of validation.
+     * @param Validator $validator
+     * @param string $type (optional) Type of validation.
      * @return void
      */
-    public function onValidate(array $data, string $type = null);
+    public function onValidate(Validator $validator, string $type = null);
 }
