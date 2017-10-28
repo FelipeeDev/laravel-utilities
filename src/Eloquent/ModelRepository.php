@@ -1,20 +1,25 @@
-<?php namespace FelipeeDev\Utilities;
+<?php namespace FelipeeDev\Utilities\Eloquent;
 
-use EnterCode\Kernel\Exceptions\NoModelSetException;
+use FelipeeDev\Utilities\DependenciesTrait;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * RepositoryTrait Overview
+ * ModelRepository Overview
  * ========================
- * Base model's repositories wrapper.
+ * Base model's repository utilities wrapper.
+ *
  * Class containing the following trait should have declared `model` field with is an:
  * `\Illuminate\Database\Eloquent\Model`
  * reference.
  *
  * @property   Model model
  */
-trait RepositoryTrait
+abstract class ModelRepository
 {
+    use DependenciesTrait;
+
+    protected $dependencies = [];
+
     /**
      * Find a model by its primary key.
      *
@@ -38,7 +43,7 @@ trait RepositoryTrait
     {
         $model = $this->query()->find($id, $columns);
         if (!$model) {
-            return $this->model->newInstance();
+            return $this->getModel()->newInstance();
         }
 
         return $model;
@@ -119,12 +124,12 @@ trait RepositoryTrait
      *
      * @return Model
      *
-     * @throws NoModelSetException
+     * @throws Exceptions\NoModelSetException
      */
     public function getModel()
     {
-        if (!$this->model || !$this->model instanceof Model) {
-            throw new NoModelSetException;
+        if (!$this->hasDependency('model') && !$this->model instanceof Model) {
+            throw new Exceptions\NoModelSetException;
         }
 
         return $this->model;

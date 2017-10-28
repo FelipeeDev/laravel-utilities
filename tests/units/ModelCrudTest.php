@@ -1,6 +1,7 @@
 <?php namespace FelipeeDev\Utilities;
 
 use FelipeeDev\Utilities\Eloquent\ModelCrud;
+use FelipeeDev\Utilities\Eloquent\ModelRepository;
 use FelipeeDev\Utilities\Testing\PackageTestCase;
 use FelipeeDev\Utilities\Validation\Rules;
 use Illuminate\Database\Eloquent\Model;
@@ -92,10 +93,8 @@ class TestModel extends Model
     protected $fillable = ['foo'];
 }
 
-class TestModelRepository implements RepositoryInterface
+class TestModelRepository extends ModelRepository
 {
-    use RepositoryTrait;
-
     protected $model;
 
     public function __construct(TestModel $model)

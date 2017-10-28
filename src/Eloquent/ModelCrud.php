@@ -9,9 +9,9 @@ use Illuminate\Database\Eloquent\Model;
  * ==============
  * Application's services trait.
  *
- * @property \FelipeeDev\Utilities\RepositoryInterface    repository   The main repository.
- * @property \FelipeeDev\Utilities\Validation\Rules|null  rules        (optional) Rules instance.
- * @property \FelipeeDev\Utilities\Adapter|null           adapter      (optional) Input adapter instance.
+ * @property \FelipeeDev\Utilities\Eloquent\ModelRepository   repository   The main repository.
+ * @property \FelipeeDev\Utilities\Validation\Rules|null      rules        (optional) Rules instance.
+ * @property \FelipeeDev\Utilities\Adapter|null               adapter      (optional) Input adapter instance.
  */
 trait ModelCrud
 {
