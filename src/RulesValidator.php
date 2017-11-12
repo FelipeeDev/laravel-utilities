@@ -32,8 +32,14 @@ class RulesValidator
     {
         try {
             $this->setMessages($rules);
+        } catch (\TypeError $e) {
+        }
+        try {
             $this->setCustomAttributes($rules);
+        } catch (\TypeError $e) {
+        }
 
+        try {
             $validator = app('validator')->make(
                 array_filter($data),
                 $rules->getRules($type),

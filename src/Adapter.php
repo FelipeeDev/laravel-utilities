@@ -27,7 +27,7 @@ abstract class Adapter implements Arrayable
     protected $defaults;
 
     /**
-     * @var array
+     * @var Collection
      */
     protected $output;
 
@@ -69,6 +69,19 @@ abstract class Adapter implements Arrayable
         }
 
         return $this->output->get($key);
+    }
+
+    /**
+     * @param string $key
+     * @param mixed $default
+     * @return Collection|mixed
+     */
+    public function getInput(string $key = '', $default = null)
+    {
+        if (empty($key)) {
+            return $this->input;
+        }
+        return array_get($this->input, $key, $default);
     }
 
     /**

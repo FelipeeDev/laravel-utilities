@@ -68,16 +68,20 @@ trait ModelCrud
         $this->preserve($model, $type, $input);
     }
 
-    /**
-     * @param Model $model
-     * @param string $rulesType
-     */
-    public function validate(Model $model, $rulesType = 'store')
+    public function validate(Model $model, string $rulesType = 'store')
     {
         if (!$this->hasDependency('rules')) {
             return;
         }
         app(RulesValidator::class)->validateModel($model, $this->rules, $rulesType);
+    }
+
+    public function validateInput(array $input, string $rulesType = 'store')
+    {
+        if (!$this->hasDependency('rules')) {
+            return;
+        }
+        app(RulesValidator::class)->validate($input, $this->rules, $rulesType);
     }
 
     /**
