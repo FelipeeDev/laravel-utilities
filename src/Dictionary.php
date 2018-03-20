@@ -22,7 +22,7 @@ abstract class Dictionary
      */
     public function get($key)
     {
-        return array_get($this->words, $key);
+        return array_get($this->words, $key, $key);
     }
 
     /**
