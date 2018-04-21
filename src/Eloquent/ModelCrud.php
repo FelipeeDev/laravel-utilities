@@ -76,6 +76,11 @@ trait ModelCrud
         app(RulesValidator::class)->validateModel($model, $this->rules, $rulesType);
     }
 
+    /**
+     * @param array $input
+     * @param string $rulesType
+     * @throws \Illuminate\Validation\ValidationException
+     */
     public function validateInput(array $input, string $rulesType = 'store')
     {
         if (!$this->hasDependency('rules')) {
@@ -92,6 +97,16 @@ trait ModelCrud
     public function destroy(Model $model)
     {
         return $model->delete();
+    }
+
+    /**
+     * @param Model $model
+     * @return bool
+     * @throws \Exception
+     */
+    public function forceDestroy(Model $model)
+    {
+        return $model->forceDelete();
     }
 
     /**

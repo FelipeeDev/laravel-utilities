@@ -1,6 +1,7 @@
 <?php namespace FelipeeDev\Utilities;
 
 use FelipeeDev\Utilities\Exceptions\DependencyNotFoundException;
+use FelipeeDev\Utilities\Exceptions\InjectedObjectWrongClassException;
 
 /**
  * DependenciesTrait Overview
@@ -46,6 +47,24 @@ trait DependenciesTrait
         }
 
         return $this->dependencies[$name] = app(get_class($this->dependencies[$name]));
+    }
+
+    /**
+     * @param string $name
+     * @param mixed $object
+     * @throws InjectedObjectWrongClassException
+     */
+    public function inject(string $name, $object)
+    {
+        if (isset($this->dependencies[$name])) {
+            $class = is_object($this->dependencies[$name])
+                ? get_class($this->dependencies[$name])
+                : $this->dependencies[$name];
+            if (!$object instanceof $class) {
+                throw new InjectedObjectWrongClassException;
+            }
+        }
+        $this->dependencies[$name] = $object;
     }
 
     public function __get($name)
