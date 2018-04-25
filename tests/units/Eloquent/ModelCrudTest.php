@@ -9,7 +9,7 @@ use Mockery as m;
 
 class ModelCrudTest extends PackageTestCase
 {
-    public function test_create()
+    public function testCreate()
     {
         $model = m::mock(new TestModel);
         $model->shouldReceive('save');
@@ -29,7 +29,7 @@ class ModelCrudTest extends PackageTestCase
     /**
      * @expectedException \Illuminate\Validation\ValidationException
      */
-    public function test_create_fails()
+    public function testCreateFails()
     {
         $service = new ModelCrudServiceExample;
 
@@ -40,7 +40,7 @@ class ModelCrudTest extends PackageTestCase
         $service->create(['foo' => '']);
     }
 
-    public function test_update()
+    public function testUpdate()
     {
         $model = m::mock(new TestModel(['foo' => 'bar']));
         $model->shouldReceive('save');
@@ -55,7 +55,7 @@ class ModelCrudTest extends PackageTestCase
     /**
      * @expectedException \Illuminate\Validation\ValidationException
      */
-    public function test_update_fails()
+    public function testUpdateFails()
     {
         $model = new TestModel(['foo' => 'bar']);
 
@@ -66,7 +66,7 @@ class ModelCrudTest extends PackageTestCase
         $service->update($model, ['foo' => '']);
     }
 
-    public function test_store_or_update()
+    public function testStoreOrUpdate()
     {
         $model = m::mock(new TestModel);
         $model->shouldReceive('save');

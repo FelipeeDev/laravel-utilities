@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class RulesValidatorTest extends PackageTestCase
 {
-    public function test_validate_rules()
+    public function testValidateRules()
     {
         $validator = $this->getRuleValidator();
 
@@ -19,7 +19,7 @@ class RulesValidatorTest extends PackageTestCase
         $this->assertTrue(true);
     }
 
-    public function test_validate_model_rules()
+    public function testValidateModelRules()
     {
         $validator = $this->getRuleValidator();
 
@@ -35,7 +35,7 @@ class RulesValidatorTest extends PackageTestCase
     /**
      * @expectedException \Error
      */
-    public function test_validate_rules_bad_type()
+    public function testValidateRulesBadType()
     {
         $validator = $this->getRuleValidator();
 
@@ -47,7 +47,7 @@ class RulesValidatorTest extends PackageTestCase
     /**
      * @expectedException \Illuminate\Validation\ValidationException
      */
-    public function test_validate_fails()
+    public function testValidateFails()
     {
         $validator = $this->getRuleValidator();
 
