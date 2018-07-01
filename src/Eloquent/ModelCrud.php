@@ -70,7 +70,7 @@ trait ModelCrud
 
     public function validate(Model $model, string $rulesType = 'store')
     {
-        if (!$this->hasDependency('rules')) {
+        if (!isset($this->rules) && !$this->hasDependency('rules')) {
             return;
         }
         app(RulesValidator::class)->validateModel($model, $this->rules, $rulesType);
@@ -83,7 +83,7 @@ trait ModelCrud
      */
     public function validateInput(array $input, string $rulesType = 'store')
     {
-        if (!$this->hasDependency('rules')) {
+        if (!isset($this->rules) && !$this->hasDependency('rules')) {
             return;
         }
         app(RulesValidator::class)->validate($input, $this->rules, $rulesType);
@@ -117,7 +117,7 @@ trait ModelCrud
      */
     protected function adaptInput(Model $model, array $input = [], $defaults = []): array
     {
-        if (!$this->hasDependency('adapter')) {
+        if (!isset($this->adapter) && !$this->hasDependency('adapter')) {
             return $input;
         }
 
